@@ -62,7 +62,7 @@
   position: absolute; /* Ensure it appears in the right position */
   background-color: white; /* Adjust as per your design */
   border: 1px solid #ddd; /* Optional: add a border for visibility */
-  width: 50px; /* Adjust to the appropriate width */
+  width: 150px; /* Adjust to the appropriate width */
   z-index: 1000; /* To make sure it appears above other content */
 }
 
