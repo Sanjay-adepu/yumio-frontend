@@ -56,7 +56,7 @@ const Navbar = ({ onSearch, footerRef }) => {
               onChange={handleSearchChange}
             />
             <Link to='/cart'>
-              <img id="basket" src="./shoppingkit.png" alt="shopping basket" />
+              <img id="basket" src="./cartset.png" alt="shopping basket" />
             </Link>
           </div>
 
