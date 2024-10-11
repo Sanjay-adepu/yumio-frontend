@@ -2,20 +2,19 @@ import React, { useState } from 'react';
 import './Loginpopup.css';
 import axios from "axios";
 
-const link = "http://localhost:4500";
+const link = "http://localhost:4500"; // Ensure this is your backend URL
 
 const Loginpopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("Login");
   const [data, setData] = useState({
     name: "",
-    email: "", // Fix input name to "email"
+    email: "",
     password: ""
   });
 
   const onchangehandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-
     setData(item => ({ ...item, [name]: value }));
   }
 
@@ -25,6 +24,10 @@ const Loginpopup = ({ setShowLogin }) => {
     
     try {
       const response = await axios.post(url, data);
+      
+      // Log the response for debugging
+      console.log("Response:", response.data);
+
       if (response.data.success) {
         alert(response.data.message);
         
@@ -38,9 +41,9 @@ const Loginpopup = ({ setShowLogin }) => {
       } else {
         alert(response.data.message);
       }
-
     } catch (error) {
-      console.log("Error occurred: ", error);
+      // Log the error response for debugging
+      console.error("Error occurred: ", error.response ? error.response.data : error.message);
       alert("Error occurred, try again later");
     }
   }
