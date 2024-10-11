@@ -1,0 +1,78 @@
+/* Exploremenu container */
+.exploremenu {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Style for the heading (h1) */
+.exploremenu h1 {
+  font-size: 2.5rem;
+  color: #333; /* Dark color */
+  margin-bottom: 10px;
+  font-weight: bold; /* Bold text for emphasis */
+}
+
+/* Style for the paragraph (p) */
+.exploremenu p {
+  font-size: 1.2rem;
+  color: #555; /* Slightly lighter color */
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+  line-height: 1.6; /* Improve readability */
+}
+
+/* Style for the menu list */
+.exploremenu-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* Horizontal scrolling */
+  padding: 10px;
+  gap: 20px; /* Space between menu items */
+  scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Style for each menu item */
+.menu-item {
+  min-width: 150px;
+  flex-shrink: 0;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  transition: border 0.3s ease, background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover, click effects, and zoom */
+}
+
+/* Style for the image inside each menu item */
+.menu-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover; /* Ensures image fits inside the circle */
+  border-radius: 50%; /* Circular shape */
+  border: 2px solid transparent; /* Default border */
+  transition: border 0.3s ease, transform 0.3s ease; /* Smooth transition for border and zoom */
+}
+
+/* Apply red border and zoom when the item is clicked (selected) */
+.menu-item.selected img {
+  border: 2px solid red;
+  transform: scale(1.3); /* Zoom in the image */
+}
+
+/* Hover effect: Optional but adds a nice touch */
+.menu-item:hover img {
+  border-color: red; /* Light gray border on hover */
+}
+
+/* Style for the text below the image in the menu item */
+.menu-item div {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Adding style for <hr> */
+hr {
+  border: none;
+  height: 1px;
+  background-color: #333; /* Dark color for the line */
+  margin: 20px 0;
+}

@@ -1,0 +1,158 @@
+/* Main Title */
+#head {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.3rem;
+  font-weight: 600;
+  color: #2e2e2e;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: capitalize;
+  margin-top:30px;
+  bottom:20px;
+}
+
+/* Grid Layout */
+.items {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Mobile by default */
+  gap: 40px;
+  padding: 0 10px;
+}
+
+/* For tablets and desktops */
+@media (min-width: 768px) {
+  .items {
+    grid-template-columns: repeat(2, 1fr); /* 2 items on tablets */
+    position:relative;
+    left:25px;
+  }
+}
+
+/* For larger screens (PC, laptops) */
+@media (min-width: 1200px) {
+  .items {
+    grid-template-columns: repeat(3, 1fr); /* 3 items on large screens */
+    position:relative;
+    left:32px;
+    
+  }
+  .item-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+ /* max-width: 300px; /* Set a maximum width for mobile cards */
+  width:100%; /* Make it responsive */
+   /* Center align the card in the grid */
+   margin: auto;
+  
+}
+
+
+}
+
+/* Card Styling */
+.item-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+ /* max-width: 300px; /* Set a maximum width for mobile cards */
+  width:290px; /* Make it responsive */
+   /* Center align the card in the grid */
+   margin: auto;
+   right:30px;
+  
+}
+
+/* Card Hover Effect */
+.item-card:hover {
+  transform: translateY(-9px);
+  border:solid red 3px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Styling */
+.item-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Item Name */
+.item-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin: 12px 0 6px 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Price Styling */
+.item-card h2 {
+  font-size: 1.6rem;
+  color: #ff3d00;
+  margin: 0 0 10px 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+/* Description */
+.item-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 10px 0;
+  line-height: 1.6;
+}
+
+/* Small star rating aligned at bottom right */
+
+
+.rating-container img {
+  width: 80px; /* Small width */
+  height: 10px; /* Small height */
+  margin-right: 4px; /* Space between star and rating */
+}
+
+
+
+/* Quantity Control */
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.quantity-control button {
+  background-color: #ff3d00;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-control button:hover {
+  background-color: #e53935;
+}
+
+.quantity-control span {
+  margin: 0 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
