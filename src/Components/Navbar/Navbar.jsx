@@ -1,12 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import Loginpopup from "../Loginpopup/Loginpopup";
 
-const Navbar = ({ onSearch, footerRef }) => { // Add footerRef as a prop
-
+const Navbar = ({ onSearch, footerRef }) => {
+  const [token, setToken] = useState(null);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem('token');
+    if (savedToken) {
+      setToken(savedToken);
+    }
+  }, []);
 
   const toggleSidebar = () => setIsSidebarVisible(!isSidebarVisible);
 
@@ -18,6 +25,11 @@ const Navbar = ({ onSearch, footerRef }) => { // Add footerRef as a prop
     if (footerRef && footerRef.current) {
       footerRef.current.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null); // Reset token state
   };
 
   return (
@@ -47,7 +59,19 @@ const Navbar = ({ onSearch, footerRef }) => { // Add footerRef as a prop
               <img id="basket" src="./shoppingkit.png" alt="shopping basket" />
             </Link>
           </div>
-          <button id="button" onClick={() => setShowLogin(true)}>Sign In</button>
+
+          {!token ? (
+            <button id="button" onClick={() => setShowLogin(true)}>Sign In</button>
+          ) : (
+            <div className="profile">
+              <img src="./profile.png" alt="profile" />
+              <ul className="hide">
+                <li><img src="./order" alt="orders" />orders</li>
+                <li onClick={handleLogout}><img src="./logout.png" alt="logout" /> log out</li>
+              </ul>
+            </div>
+          )}
+
           <img id="menu" onClick={toggleSidebar} src="./menu_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="menu icon" />
         </div>
 
@@ -59,7 +83,7 @@ const Navbar = ({ onSearch, footerRef }) => { // Add footerRef as a prop
               </Link>
               <li onClick={() => setShowLogin(true)}>Sign In</li>
               <li onClick={scrollToFooter}>Contact Us</li>
-              <Link  id="new" to="/cart">
+              <Link id="new" to="/cart">
                 <li>Cart</li>
               </Link>
             </ul>

@@ -53,6 +53,49 @@
   align-items: center;
   gap: 15px;
 }
+/* Hide the ul by default */
+.profile ul {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute; /* Ensure it appears in the right position */
+  background-color: white; /* Adjust as per your design */
+  border: 1px solid #ddd; /* Optional: add a border for visibility */
+  width: 150px; /* Adjust to the appropriate width */
+  z-index: 1000; /* To make sure it appears above other content */
+}
+
+/* When hovering over the profile div, show the ul */
+.profile:hover ul {
+  display: block;
+}
+
+/* Add some styling for the list items */
+.profile ul li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.profile ul li:hover {
+  background-color: #f0f0f0; /* Change background on hover for better visibility */
+}
+
+/* Style the images and text in the list items */
+.profile ul li img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px; /* Space between image and text */
+  vertical-align: middle; /* Aligns image and text */
+}
+
+/* Optional: Style for the profile picture */
+.profile img {
+  cursor: pointer;
+  width: 40px; /* Adjust profile picture size */
+  height: 40px;
+  border-radius: 50%; /* Makes the profile picture circular */
+}
 
 
 
@@ -105,6 +148,9 @@
 @media(max-width: 670px) {
   .elements {
     display: none;
+  }
+  .profile{
+    display:none;
   }
   #new{
     text-decoration: none;

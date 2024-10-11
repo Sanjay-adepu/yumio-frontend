@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Loginpopup.css';
+import axios from "axios";
 
 
 const link = "http://localhost:4500";
@@ -21,10 +22,21 @@ const onchangehandler = (event)=>{
 
 const onsubmithandler =async()=>{
   const url = currState===Login ? `${link}/login `: `${link}/register`;
-  
-  
-  
-  
+  try{
+    const response= await axios.post(url,data);
+    if(response.data.success){
+      alert(response.data.message)
+      setShowLogin(false);
+    }
+    else{
+      alert(response.data.message);
+    }
+    
+  }catch(error){
+    console.log("error occured :",error)
+    alert("error occured ,try again later")
+  }
+
 }
 
 
@@ -42,18 +54,18 @@ const onsubmithandler =async()=>{
         </div>
 
         <div className="login-popup-inputs">
-          <form>
+          <form onSubmit={onsubmithandler}>
           {currState === "Login" ? (
             <>
               
-              <input type="gmail" placeholder="Your email" required />
-              <input type="password" placeholder="Password" required />
+              <input type="gmail" onChange={onchangehandler} name="gmail" value={data.gmail} placeholder="Your email" required />
+              <input type="password" onChange={onchangehandler} name="password" value={data.password} placeholder="Password" required />
             </>
           ) : (
             <>
-              <input type="text" placeholder="Your name" required />
-              <input type="gmail" placeholder="Your gmail" required />
-              <input type="password" placeholder="Password" required />
+              <input type="text" name="name"  onChange={onchangehandler} value={data.name} placeholder="Your name" required />
+              <input type="gmail" onChange={onchangehandler} name="gmail" value={data.gmail} placeholder="Your gmail" required />
+              <input type="password" onChange={onchangehandler} name="password" value={data.password} placeholder="Password" required />
             </>
           )}
           <button type='submit'>{currState === "Sign Up" ? "Create account" : "Login"}</button>
