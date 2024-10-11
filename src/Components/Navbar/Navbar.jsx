@@ -66,7 +66,7 @@ const Navbar = ({ onSearch, footerRef }) => {
             <div className="profile">
               <img src="./profile.png" alt="profile" />
               <ul className="hide">
-                <li><img src="./order" alt="orders" />orders</li>
+                <li><img src="./order.png" alt="orders" />orders</li>
                 <li onClick={handleLogout}><img src="./logout.png" alt="logout" /> log out</li>
               </ul>
             </div>
