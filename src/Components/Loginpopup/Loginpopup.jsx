@@ -2,44 +2,48 @@ import React, { useState } from 'react';
 import './Loginpopup.css';
 import axios from "axios";
 
-
 const link = "http://localhost:4500";
 
 const Loginpopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("Login");
-const [data,setdata]=useState({
-  name:"",
-  gmail:"",
-  password:""
-});
+  const [data, setData] = useState({
+    name: "",
+    email: "", // Fix input name to "email"
+    password: ""
+  });
 
-const onchangehandler = (event)=>{
-  const name = event.target.name;
-  const value = event.target.value;
-  
-  setdata(item=>({...item,[name]:value}))
-}
+  const onchangehandler = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-const onsubmithandler =async()=>{
-  const url = currState===Login ? `${link}/login `: `${link}/register`;
-  try{
-    const response= await axios.post(url,data);
-    if(response.data.success){
-      alert(response.data.message)
-      setShowLogin(false);
-    }
-    else{
-      alert(response.data.message);
-    }
-    
-  }catch(error){
-    console.log("error occured :",error)
-    alert("error occured ,try again later")
+    setData(item => ({ ...item, [name]: value }));
   }
 
-}
+  const onsubmithandler = async (event) => {
+    event.preventDefault();  // Prevent form from reloading the page
+    const url = currState === "Login" ? `${link}/login` : `${link}/register`;
+    
+    try {
+      const response = await axios.post(url, data);
+      if (response.data.success) {
+        alert(response.data.message);
+        
+        // Store token if available (in case of login)
+        const token = response.data.token;
+        if (token) {
+          localStorage.setItem('token', token);
+        }
 
+        setShowLogin(false);
+      } else {
+        alert(response.data.message);
+      }
 
+    } catch (error) {
+      console.log("Error occurred: ", error);
+      alert("Error occurred, try again later");
+    }
+  }
 
   return (
     <div className="login-popup">
@@ -49,26 +53,25 @@ const onsubmithandler =async()=>{
           <img 
             onClick={() => setShowLogin(false)} 
             src="./close.png"
-            alt="close-icon" />
-          
+            alt="close-icon" 
+          />
         </div>
 
         <div className="login-popup-inputs">
           <form onSubmit={onsubmithandler}>
-          {currState === "Login" ? (
-            <>
-              
-              <input type="gmail" onChange={onchangehandler} name="gmail" value={data.gmail} placeholder="Your email" required />
-              <input type="password" onChange={onchangehandler} name="password" value={data.password} placeholder="Password" required />
-            </>
-          ) : (
-            <>
-              <input type="text" name="name"  onChange={onchangehandler} value={data.name} placeholder="Your name" required />
-              <input type="gmail" onChange={onchangehandler} name="gmail" value={data.gmail} placeholder="Your gmail" required />
-              <input type="password" onChange={onchangehandler} name="password" value={data.password} placeholder="Password" required />
-            </>
-          )}
-          <button type='submit'>{currState === "Sign Up" ? "Create account" : "Login"}</button>
+            {currState === "Login" ? (
+              <>
+                <input type="email" onChange={onchangehandler} name="email" value={data.email} placeholder="Your email" required />
+                <input type="password" onChange={onchangehandler} name="password" value={data.password} placeholder="Password" required />
+              </>
+            ) : (
+              <>
+                <input type="text" name="name" onChange={onchangehandler} value={data.name} placeholder="Your name" required />
+                <input type="email" onChange={onchangehandler} name="email" value={data.email} placeholder="Your email" required />
+                <input type="password" onChange={onchangehandler} name="password" value={data.password} placeholder="Password" required />
+              </>
+            )}
+            <button type='submit'>{currState === "Sign Up" ? "Create account" : "Login"}</button>
           </form>
         </div>
 
