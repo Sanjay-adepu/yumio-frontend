@@ -21,7 +21,7 @@ const Loginpopup = ({ setShowLogin }) => {
 
   const onsubmithandler = async (event) => {
     event.preventDefault();  // Prevent form from reloading the page
-    const url = currState === "Login" ? `${link}/login` : `${link}/register`;
+    const url = currState === "Login" ? `${link}/user/login` : `${link}/user/register`;
     
     try {
       const response = await axios.post(url, data);
