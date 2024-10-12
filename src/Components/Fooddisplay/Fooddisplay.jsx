@@ -4,7 +4,7 @@ import axios from "axios";
 import { StoreContext } from "../../Context/StoreContext";
 
 const Fooddisplay = ({ selectedCategory }) => {
-  const url = "http://localhost:4500"; // Adjust this as per your backend URL
+  const url = "http://localhost:4500"; // Backend API URL
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
   const [Data, setData] = useState([]);
 
@@ -13,7 +13,7 @@ const Fooddisplay = ({ selectedCategory }) => {
     try {
       const response = await axios.get(`${url}/food/getfood`);
       const data = response.data.data;
-      console.log("this is data", data); // Check if data is coming from the backend
+      console.log("Fetched Data:", data); // Check if data is coming from the backend
       setData(data); // Store data in state
     } catch (error) {
       console.log("Error fetching data:", error);
@@ -22,13 +22,19 @@ const Fooddisplay = ({ selectedCategory }) => {
 
   // Call fetchData when the component mounts
   useEffect(() => {
-    fetchData(); // No need to pass arguments here
+    fetchData(); // Fetch data once on mount
   }, []); // Empty dependency array ensures it runs only once on mount
+
+  // Debugging logs
+  console.log("Selected Category:", selectedCategory);
+  console.log("Data Items:", Data); // Log all data items
 
   // Filter items based on the selected category (case-insensitive comparison)
   const filteredItems = selectedCategory
     ? Data.filter((item) => item.category?.toLowerCase() === selectedCategory.toLowerCase())
     : Data; // If no category selected, show all items
+
+  console.log("Filtered Items:", filteredItems); // Log filtered items
 
   return (
     <div>
