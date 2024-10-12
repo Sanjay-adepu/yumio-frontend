@@ -14,9 +14,11 @@ const Fooddisplay = () => {
     const fetchFoodData = async () => {
       try {
         const response = await axios.get("http://localhost:4500/food/getfood");
-        setData(response.data.data);  // Assuming the data is in response.data.data
+        console.log(response.data);  // Log the entire response to check the structure
+        setData(response.data.data);  // Assuming data is in response.data.data
         setLoading(false);
       } catch (error) {
+        console.error("Error fetching food data:", error);  // Log the error if any
         setError("Failed to load food items");
         setLoading(false);
       }
@@ -34,10 +36,10 @@ const Fooddisplay = () => {
       <h1 id="head">Top dishes near you</h1>
       <div className="items">
         {data.map((item) => (
-          <div key={item.id} className="item-card">
+          <div key={item._id} className="item-card">
             {/* Use backend uploads folder for image */}
             <img 
-              src={`http://localhost:4500/${item.image}`}  // Assuming item.image is something like "uploads/image1.jpg"
+              src={`http://localhost:4500/uploads/${item.image}`}  // Use the correct path for images
               alt={item.name} 
             />
             <h3>{item.name}</h3>
@@ -50,9 +52,9 @@ const Fooddisplay = () => {
             </div>
 
             <div className="quantity-control">
-              <button onClick={() => removeFromCart(item.id)}>-</button>
-              <span>{cartItems[item.id] || 0}</span>
-              <button onClick={() => addToCart(item.id)}>+</button>
+              <button onClick={() => removeFromCart(item._id)}>-</button>
+              <span>{cartItems[item._id] || 0}</span>
+              <button onClick={() => addToCart(item._id)}>+</button>
             </div>
           </div>
         ))}
