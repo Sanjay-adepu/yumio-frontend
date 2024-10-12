@@ -3,8 +3,13 @@ import "./Fooddisplay.css";
 import axios from "axios";
 import { StoreContext } from "../../Context/StoreContext";
 
+
+
 const Fooddisplay = ({ selectedCategory }) => {
-  const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
+
+const url ="http://localhost:4500"
+
+  const { cartItems, addToCart, removeFromCart} = useContext(StoreContext);
   const [Data, setData] = useState([]);
 
   // Fetch food data
