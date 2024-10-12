@@ -12,7 +12,7 @@ const Fooddisplay = ({ selectedCategory }) => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${url}/food/getfood`);
-      const data = response.data;
+      const data = response.data.data;
       console.log("this is data", data); // Check if data is coming from the backend
       setData(data); // Store data in state
     } catch (error) {
