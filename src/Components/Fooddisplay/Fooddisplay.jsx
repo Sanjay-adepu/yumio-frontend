@@ -10,23 +10,21 @@ const Fooddisplay = () => {
   const [error, setError] = useState(null);
 
   // Fetch food data from backend API
-  useEffect(() => {
-    const fetchFoodData = async () => {
-      try {
-        const response = await axios.get("http://localhost:4500/food/getfood");
-        console.log(response.data);  // Log the entire response to check the structure
-        setData(response.data.data);  // Assuming data is in response.data.data
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching food data:", error);  // Log the error if any
-        setError("Failed to load food items");
-        setLoading(false);
-      }
-    };
-
-    fetchFoodData();
-  }, []);
-
+ const fetchFoodData = async () => {
+  try {
+    const response = await axios.get("http://localhost:4500/food/getfood");
+    
+    // Alert the entire response data to check the structure
+    alert(JSON.stringify(response.data));  // This will show the data in an alert popup
+    
+    setData(response.data.data);  // Assuming data is in response.data.data
+    setLoading(false);
+  } catch (error) {
+    alert("Error fetching food data: " + error.message);  // Alert the error if any
+    setError("Failed to load food items");
+    setLoading(false);
+  }
+};
   // Render loading or error message if necessary
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
