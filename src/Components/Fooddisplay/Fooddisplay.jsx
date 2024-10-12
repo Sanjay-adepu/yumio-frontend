@@ -1,22 +1,30 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./Fooddisplay.css";
-import axios from "axios";
 import { StoreContext } from "../../Context/StoreContext";
 
 const Fooddisplay = ({ selectedCategory }) => {
-  const url = "http://localhost:4500"; // Backend API URL
+  const url = "http://localhost:4500/food/getfood"; // Backend API URL
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
-  const [Data, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
   // Fetch food data from the backend
   const fetchData = async () => {
+    setLoading(true); // Set loading to true before fetching
     try {
-      const response = await axios.get(`${url}/food/getfood`);
-      const data = response.data.data;
-      console.log("Fetched Data:", data); // Check if data is coming from the backend
-      setData(data); // Store data in state
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const result = await response.json();
+      console.log("Fetched Data:", result.data); // Check if data is coming from the backend
+      setData(result.data); // Store data in state
     } catch (error) {
-      console.log("Error fetching data:", error);
+      console.error("Error fetching data:", error);
+      setError(error.message); // Set error message
+    } finally {
+      setLoading(false); // Set loading to false after fetching
     }
   };
 
@@ -25,22 +33,18 @@ const Fooddisplay = ({ selectedCategory }) => {
     fetchData(); // Fetch data once on mount
   }, []); // Empty dependency array ensures it runs only once on mount
 
-  // Debugging logs
-  console.log("Selected Category:", selectedCategory);
-  console.log("Data Items:", Data); // Log all data items
-
   // Filter items based on the selected category (case-insensitive comparison)
   const filteredItems = selectedCategory
-    ? Data.filter((item) => item.category?.toLowerCase() === selectedCategory.toLowerCase())
-    : Data; // If no category selected, show all items
-
-  console.log("Filtered Items:", filteredItems); // Log filtered items
+    ? data.filter((item) => item.category?.toLowerCase() === selectedCategory.toLowerCase())
+    : data; // If no category selected, show all items
 
   return (
     <div>
       <h1 id="head">Top dishes near you</h1>
-      {filteredItems.length === 0 ? (
-        <p>No items available</p>
+      {loading && <p>Loading...</p>} {/* Show loading state */}
+      {error && <p>Error: {error}</p>} {/* Show error message */}
+      {filteredItems.length === 0 && !loading ? (
+        <p>No items available</p> // Show message if no items
       ) : (
         <div className="items">
           {filteredItems.map((item) => (
