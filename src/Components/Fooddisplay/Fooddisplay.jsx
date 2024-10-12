@@ -12,6 +12,7 @@ const Fooddisplay = ({ selectedCategory }) => {
     try {
       const response = await axios.get(`${url}/food/getfood`);
       const data = response.data;
+console.log("this is data",data);
       setData(data);
     } catch (error) {
       console.log(error);
@@ -19,8 +20,8 @@ const Fooddisplay = ({ selectedCategory }) => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(Data);
+  }, [Data]);
 
   // Filter items based on selected category
   const filteredItems = selectedCategory
