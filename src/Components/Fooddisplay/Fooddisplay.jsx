@@ -1,26 +1,22 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Fooddisplay.css";
 import { StoreContext } from "../../Context/StoreContext";
 
 const Fooddisplay = ({ selectedCategory }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [items, setItems] = useState([]);  // State to store food items
+  const [loading, setLoading] = useState(true);  // Loading state
 
+  // Fetch food items from backend
   useEffect(() => {
-    // Fetch data from the backend
     const fetchFoodItems = async () => {
       try {
         const response = await fetch("http://localhost:4500/food/getfood");
-        if (!response.ok) {
-          throw new Error("Failed to fetch food items");
-        }
         const data = await response.json();
-        setItems(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
+        setItems(data);  // Set the fetched data to state
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching food items:", error);
         setLoading(false);
       }
     };
@@ -33,8 +29,9 @@ const Fooddisplay = ({ selectedCategory }) => {
     ? items.filter((item) => item.catagory === selectedCategory)
     : items;
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -49,7 +46,7 @@ const Fooddisplay = ({ selectedCategory }) => {
 
             {/* Small star rating placed at the bottom right */}
             <div className="rating-container">
-              <img src="/rating.png" alt="Rating Star" />
+              <img src="./rating.png" alt="Rating Star" />
             </div>
 
             <div className="quantity-control">
