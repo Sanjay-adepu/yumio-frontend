@@ -12,20 +12,21 @@ const Fooddisplay = ({ selectedCategory }) => {
     try {
       const response = await axios.get(`${url}/food/getfood`);
       const data = response.data;
-console.log("this is data",data);
-      setData(data);
+      console.log("this is data", data); // Ensure data is logged correctly
+      setData(data); // Set data to state
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching data:", error);
     }
   };
 
+  // Call fetchData only once on component mount
   useEffect(() => {
-    fetchData(Data);
-  }, [Data]);
+    fetchData(); // No need to pass Data or any argument here
+  }, []); // Empty dependency array ensures it runs only once on mount
 
   // Filter items based on selected category
   const filteredItems = selectedCategory
-    ? Data.filter((item) => item.category === selectedCategory)  // Corrected "catagory" to "category"
+    ? Data.filter((item) => item.category === selectedCategory)
     : Data;
 
   return (
@@ -33,7 +34,7 @@ console.log("this is data",data);
       <h1 id="head">Top dishes near you</h1>
       <div className="items">
         {filteredItems.map((item) => (
-          <div  className="item-card">
+          <div key={item._id} className="item-card">
             <img src={item.image} alt={item.name} />
             <h3>{item.name}</h3>
             <h2>₹{item.price}</h2>
@@ -45,9 +46,9 @@ console.log("this is data",data);
             </div>
 
             <div className="quantity-control">
-              <button onClick={() => removeFromCart(item.id)}>-</button>
-              <span>{cartItems[item.id] || 0}</span>
-              <button onClick={() => addToCart(item.id)}>+</button>
+              <button onClick={() => removeFromCart(item._id)}>-</button>
+              <span>{cartItems[item._id] || 0}</span>
+              <button onClick={() => addToCart(item._id)}>+</button>
             </div>
           </div>
         ))}
