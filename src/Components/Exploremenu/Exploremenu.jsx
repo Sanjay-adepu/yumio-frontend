@@ -14,7 +14,7 @@ const Exploremenu = ({ searchQuery }) => {
   return (
     <div className="exploremenu">
       <h1>Explore our menu</h1>
-      <p>
+      <p> 
         Choose from a diverse menu featuring a delectable array of dishes. Our
         mission is to satisfy your cravings and elevate your dining experience,
         one delicious meal at a time.
