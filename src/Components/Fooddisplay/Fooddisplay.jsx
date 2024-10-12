@@ -3,66 +3,62 @@ import "./Fooddisplay.css";
 import axios from "axios";
 import { StoreContext } from "../../Context/StoreContext";
 
-
-
 const Fooddisplay = ({ selectedCategory }) => {
-
-const url ="http://localhost:4500"
-
-  const { cartItems, addToCart, removeFromCart} = useContext(StoreContext);
+  const url = "http://localhost:4500"; // Adjust this as per your backend URL
+  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
   const [Data, setData] = useState([]);
 
-  // Fetch food data
+  // Fetch food data from the backend
   const fetchData = async () => {
     try {
       const response = await axios.get(`${url}/food/getfood`);
       const data = response.data;
-      console.log("this is data", data); // Ensure data is logged correctly
-      setData(data); // Set data to state
+      console.log("this is data", data); // Check if data is coming from the backend
+      setData(data); // Store data in state
     } catch (error) {
       console.log("Error fetching data:", error);
     }
   };
 
-  // Call fetchData only once on component mount
+  // Call fetchData when the component mounts
   useEffect(() => {
-    fetchData(); // No need to pass Data or any argument here
+    fetchData(); // No need to pass arguments here
   }, []); // Empty dependency array ensures it runs only once on mount
 
-  // Filter items based on selected category
+  // Filter items based on the selected category (case-insensitive comparison)
   const filteredItems = selectedCategory
-    ? Data.filter((item) => item.category === selectedCategory)
-    : Data;
+    ? Data.filter((item) => item.category?.toLowerCase() === selectedCategory.toLowerCase())
+    : Data; // If no category selected, show all items
 
   return (
-  <div>
-    <h1 id="head">Top dishes near you</h1>
-    {filteredItems.length === 0 ? (
-      <p>No items available</p>
-    ) : (
-      <div className="items">
-        {filteredItems.map((item) => (
-          <div key={item._id} className="item-card">
-            <img src={`${url}/${item.image}`} alt={item.name} />
-            <h3>{item.name}</h3>
-            <h2>₹{item.price}</h2>
-            <p>{item.description}</p>
+    <div>
+      <h1 id="head">Top dishes near you</h1>
+      {filteredItems.length === 0 ? (
+        <p>No items available</p>
+      ) : (
+        <div className="items">
+          {filteredItems.map((item) => (
+            <div key={item._id} className="item-card">
+              <img src={`${url}/${item.image}`} alt={item.name} />
+              <h3>{item.name}</h3>
+              <h2>₹{item.price}</h2>
+              <p>{item.description}</p>
 
-            <div className="rating-container">
-              <img src="./rating.png" alt="Rating Star" />
-            </div>
+              <div className="rating-container">
+                <img src="./rating.png" alt="Rating Star" />
+              </div>
 
-            <div className="quantity-control">
-              <button onClick={() => removeFromCart(item._id)}>-</button>
-              <span>{cartItems[item._id] || 0}</span>
-              <button onClick={() => addToCart(item._id)}>+</button>
+              <div className="quantity-control">
+                <button onClick={() => removeFromCart(item._id)}>-</button>
+                <span>{cartItems[item._id] || 0}</span>
+                <button onClick={() => addToCart(item._id)}>+</button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    )}
-  </div>
-);
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Fooddisplay;
