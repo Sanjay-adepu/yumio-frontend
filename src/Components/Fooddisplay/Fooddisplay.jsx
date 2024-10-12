@@ -33,7 +33,7 @@ console.log("this is data",data);
       <h1 id="head">Top dishes near you</h1>
       <div className="items">
         {filteredItems.map((item) => (
-          <div key={item._id} className="item-card">
+          <div  className="item-card">
             <img src={item.image} alt={item.name} />
             <h3>{item.name}</h3>
             <h2>₹{item.price}</h2>
