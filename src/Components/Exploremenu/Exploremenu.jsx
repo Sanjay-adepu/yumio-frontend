@@ -1,25 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Exploremenu.css";
-import { Catagory, items } from "../../Assets/Catagory.js";
-import Fooddisplay from "../Fooddisplay/Fooddisplay";
+import { Catagory } from "../../Assets/Catagory.js"; // Assuming this contains categories
+import Fooddisplay from "../Fooddisplay/Fooddisplay"; // Assuming this is the component that displays food items
 
 const Exploremenu = ({ searchQuery }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [filteredItems, setFilteredItems] = useState(items); // Manage filtered items state
 
-  useEffect(() => {
-    // Filter items based on search query
-    if (searchQuery) {
-      const filtered = items.filter((item) => 
-        item.catagory.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredItems(filtered);
-    } else {
-      setFilteredItems(items); // Reset if no search query
-    }
-  }, [searchQuery]);
-
+  // Handle category click event
   const handleItemClick = (category) => {
     setSelectedCategory(category);
   };
@@ -39,7 +26,7 @@ const Exploremenu = ({ searchQuery }) => {
             <div
               key={index}
               className={`menu-item ${selectedCategory === item.catagory ? "selected" : ""}`}
-              onClick={() => handleItemClick(item.catagory)}
+              onClick={() => handleItemClick(item.catagory)} // Handle category selection
             >
               <img src={item.image} alt={item.catagory} />
               <div>{item.catagory}</div>
@@ -48,8 +35,8 @@ const Exploremenu = ({ searchQuery }) => {
         })}
       </div>
 
-      {/* Display filtered items */}
-      <Fooddisplay items={filteredItems} selectedCategory={selectedCategory} />
+      {/* Pass selectedCategory to Fooddisplay */}
+      <Fooddisplay selectedCategory={selectedCategory} />
 
       <hr />
     </div>
