@@ -1,15 +1,40 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Fooddisplay.css";
-import { items } from "../../Assets/Catagory.js";
 import { StoreContext } from "../../Context/StoreContext";
 
 const Fooddisplay = ({ selectedCategory }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Fetch data from the backend
+    const fetchFoodItems = async () => {
+      try {
+        const response = await fetch("http://localhost:4500/food/getfood");
+        if (!response.ok) {
+          throw new Error("Failed to fetch food items");
+        }
+        const data = await response.json();
+        setItems(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFoodItems();
+  }, []);
 
   // Filter items based on selected category
   const filteredItems = selectedCategory
     ? items.filter((item) => item.catagory === selectedCategory)
     : items;
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
@@ -24,7 +49,7 @@ const Fooddisplay = ({ selectedCategory }) => {
 
             {/* Small star rating placed at the bottom right */}
             <div className="rating-container">
-              <img src="./rating.png" alt="Rating Star" />
+              <img src="/rating.png" alt="Rating Star" />
             </div>
 
             <div className="quantity-control">
