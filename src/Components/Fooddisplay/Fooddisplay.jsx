@@ -35,17 +35,19 @@ const url ="http://localhost:4500"
     : Data;
 
   return (
-    <div>
-      <h1 id="head">Top dishes near you</h1>
+  <div>
+    <h1 id="head">Top dishes near you</h1>
+    {filteredItems.length === 0 ? (
+      <p>No items available</p>
+    ) : (
       <div className="items">
         {filteredItems.map((item) => (
           <div key={item._id} className="item-card">
-            <img src={item.image} alt={item.name} />
+            <img src={`${url}/${item.image}`} alt={item.name} />
             <h3>{item.name}</h3>
             <h2>₹{item.price}</h2>
             <p>{item.description}</p>
 
-            {/* Small star rating placed at the bottom right */}
             <div className="rating-container">
               <img src="./rating.png" alt="Rating Star" />
             </div>
@@ -58,8 +60,9 @@ const url ="http://localhost:4500"
           </div>
         ))}
       </div>
-    </div>
-  );
+    )}
+  </div>
+);
 };
 
 export default Fooddisplay;
