@@ -1,37 +1,38 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./Fooddisplay.css";
+import axios from "axios";
 import { StoreContext } from "../../Context/StoreContext";
 
+
+
+
 const Fooddisplay = ({ selectedCategory }) => {
-  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
-  const [items, setItems] = useState([]);  // State to store food items
-  const [loading, setLoading] = useState(true);  // Loading state
+  const { cartItems, addToCart, removeFromCart,url } = useContext(StoreContext);
 
-  // Fetch food items from backend
-  useEffect(() => {
-    const fetchFoodItems = async () => {
-      try {
-        const response = await fetch("http://localhost:4500/food/getfood");
-        const data = await response.json();
-        setItems(data);  // Set the fetched data to state
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching food items:", error);
-        setLoading(false);
-      }
-    };
+const [Data,setdata] = useState([])
 
-    fetchFoodItems();
-  }, []);
+const fetchdata= async()=>{
+  try{
+    const response = await axios.get(`${url}/food/getfood`);
+    const data=response.data;
+       setdata(data);
+  }catch(error){
+    console.log(error);
+    
+  }
+
+}
+
+
+
+
+
+
 
   // Filter items based on selected category
   const filteredItems = selectedCategory
-    ? items.filter((item) => item.catagory === selectedCategory)
+    ? Data.filter((item) => item.catagory === selectedCategory)
     : items;
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
