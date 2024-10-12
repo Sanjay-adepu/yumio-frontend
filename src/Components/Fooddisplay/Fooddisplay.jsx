@@ -1,72 +1,62 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Fooddisplay.css";
+import axios from "axios";
 import { StoreContext } from "../../Context/StoreContext";
 
-const Fooddisplay = ({ selectedCategory }) => {
-  const url = "http://localhost:4500/food/getfood"; // Backend API URL
+const Fooddisplay = () => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [data, setData] = useState([]);  // State to hold food data
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch food data from the backend
-  const fetchData = async () => {
-    setLoading(true); // Set loading to true before fetching
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const result = await response.json();
-      console.log("Fetched Data:", result.data); // Check if data is coming from the backend
-      setData(result.data); // Store data in state
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setError(error.message); // Set error message
-    } finally {
-      setLoading(false); // Set loading to false after fetching
-    }
-  };
-
-  // Call fetchData when the component mounts
+  // Fetch food data from backend API
   useEffect(() => {
-    fetchData(); // Fetch data once on mount
-  }, []); // Empty dependency array ensures it runs only once on mount
+    const fetchFoodData = async () => {
+      try {
+        const response = await axios.get("http://localhost:4500/food/getfood");
+        setData(response.data.data);  // Assuming the data is in response.data.data
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to load food items");
+        setLoading(false);
+      }
+    };
 
-  // Filter items based on the selected category (case-insensitive comparison)
-  const filteredItems = selectedCategory
-    ? data.filter((item) => item.category?.toLowerCase() === selectedCategory.toLowerCase())
-    : data; // If no category selected, show all items
+    fetchFoodData();
+  }, []);
+
+  // Render loading or error message if necessary
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div>
       <h1 id="head">Top dishes near you</h1>
-      {loading && <p>Loading...</p>} {/* Show loading state */}
-      {error && <p>Error: {error}</p>} {/* Show error message */}
-      {filteredItems.length === 0 && !loading ? (
-        <p>No items available</p> // Show message if no items
-      ) : (
-        <div className="items">
-          {filteredItems.map((item) => (
-            <div key={item._id} className="item-card">
-              <img src={`${url}/${item.image}`} alt={item.name} />
-              <h3>{item.name}</h3>
-              <h2>₹{item.price}</h2>
-              <p>{item.description}</p>
+      <div className="items">
+        {data.map((item) => (
+          <div key={item.id} className="item-card">
+            {/* Use backend uploads folder for image */}
+            <img 
+              src={`http://localhost:4500/${item.image}`}  // Assuming item.image is something like "uploads/image1.jpg"
+              alt={item.name} 
+            />
+            <h3>{item.name}</h3>
+            <h2>₹{item.price}</h2>
+            <p>{item.description}</p>
 
-              <div className="rating-container">
-                <img src="./rating.png" alt="Rating Star" />
-              </div>
-
-              <div className="quantity-control">
-                <button onClick={() => removeFromCart(item._id)}>-</button>
-                <span>{cartItems[item._id] || 0}</span>
-                <button onClick={() => addToCart(item._id)}>+</button>
-              </div>
+            {/* Small star rating placed at the bottom right */}
+            <div className="rating-container">
+              <img src="./rating.png" alt="Rating Star" />
             </div>
-          ))}
-        </div>
-      )}
+
+            <div className="quantity-control">
+              <button onClick={() => removeFromCart(item.id)}>-</button>
+              <span>{cartItems[item.id] || 0}</span>
+              <button onClick={() => addToCart(item.id)}>+</button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
