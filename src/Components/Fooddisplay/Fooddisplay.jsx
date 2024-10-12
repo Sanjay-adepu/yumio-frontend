@@ -1,38 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Fooddisplay.css";
 import axios from "axios";
 import { StoreContext } from "../../Context/StoreContext";
 
-
-
-
 const Fooddisplay = ({ selectedCategory }) => {
-  const { cartItems, addToCart, removeFromCart,url } = useContext(StoreContext);
+  const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
+  const [Data, setData] = useState([]);
 
-const [Data,setdata] = useState([])
+  // Fetch food data
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${url}/food/getfood`);
+      const data = response.data;
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-const fetchdata= async()=>{
-  try{
-    const response = await axios.get(`${url}/food/getfood`);
-    const data=response.data;
-       setdata(data);
-  }catch(error){
-    console.log(error);
-    
-  }
-
-}
-
-
-
-
-
-
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   // Filter items based on selected category
   const filteredItems = selectedCategory
-    ? Data.filter((item) => item.catagory === selectedCategory)
-    : items;
+    ? Data.filter((item) => item.category === selectedCategory)  // Corrected "catagory" to "category"
+    : Data;
 
   return (
     <div>
