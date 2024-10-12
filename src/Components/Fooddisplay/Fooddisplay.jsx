@@ -31,6 +31,7 @@ const Fooddisplay = () => {
 
   return (
     <div>
+        <h1>{response.data}</h1>
       <h1 id="head">Top dishes near you</h1>
       <div className="items">
         {data.map((item) => (
