@@ -30,7 +30,7 @@
   height: 10px;
   margin-top: 10px;
 position:relative;
-left:50px
+left:30px
 }
 
 }
@@ -42,6 +42,14 @@ left:50px
     position: relative;
     
   }
+.foodtable img[alt^="rating"] {
+  width: 80px;
+  height: 10px;
+  margin-top: 10px;
+position:relative;
+left:120px
+}
+
 }
 
 /* Card Styling */
@@ -103,7 +111,7 @@ left:50px
   height: 10px;
   margin-top: 10px;
 position:relative;
-left:100px
+left:120px
 }
 
 /* Quantity Control */
