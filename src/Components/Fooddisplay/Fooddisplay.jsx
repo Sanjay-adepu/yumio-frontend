@@ -2,24 +2,24 @@ import React, { useContext } from "react";
 import "./Fooddisplay.css";
 import { StoreContext } from "../../Context/StoreContext";
 
-const Fooddisplay = () => {
+const Fooddisplay = ({ selectedCategory }) => {
   const { cartItems, addToCart, removeFromCart, foodItems } = useContext(StoreContext);
 
   const url = "http://localhost:4500";
 
-  // Define the removefood function (for future functionality if needed)
-  const removefood = (id) => {
-    console.log("Removing food with ID:", id);
-  };
+  // Filter food items based on selected category
+  const filteredItems = selectedCategory
+    ? foodItems.filter((item) => item.category === selectedCategory)
+    : foodItems;
 
   return (
     <div>
       <h1 id="head">Top dishes near you</h1>
       <div className="items">
-        {foodItems.length > 0 ? (
-          foodItems.map((item, index) => (
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item, index) => (
             <div key={index} className="foodtable">
-              <div onClick={() => removefood(item._id)}>Remove</div>
+              <div onClick={() => console.log("Removing food with ID:", item._id)}>Remove</div>
               <img
                 src={`${url}/uploads/${item.image}`}
                 alt={item.name}
@@ -44,7 +44,7 @@ const Fooddisplay = () => {
             </div>
           ))
         ) : (
-          <p>No food items available.</p>
+          <p>No food items available in this category.</p>
         )}
       </div>
     </div>
