@@ -9,7 +9,7 @@ const StoreContextProvider = (props) => {
 
   const url = "http://localhost:4500";
 
-  // Fetch food items from API
+  // Fetch food items from API 
   useEffect(() => {
     const fetchFoodItems = async () => {
       try {
