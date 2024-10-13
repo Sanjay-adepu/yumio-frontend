@@ -19,7 +19,7 @@ const Fooddisplay = ({ selectedCategory }) => {
         {filteredItems.length > 0 ? (
           filteredItems.map((item, index) => (
             <div key={index} className="foodtable">
-              <div onClick={() => removeFromCart(item._id)}>Remove</div>
+              
               <img
                 src={`${url}/uploads/${item.image}`}
                 alt={item.name}
