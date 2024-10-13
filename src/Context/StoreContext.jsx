@@ -34,7 +34,7 @@ const getTotalCartAmount = () => {
 };
 
     return (
-        <StoreContext.Provider value={{ cartItems, addToCart, removeFromCart,url,getTotalCartAmount }}>
+        <StoreContext.Provider value={{ cartItems, addToCart, removeFromCart,getTotalCartAmount }}>
             {props.children}
         </StoreContext.Provider>
     );
