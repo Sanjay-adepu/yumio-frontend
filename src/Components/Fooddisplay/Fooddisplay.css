@@ -37,15 +37,6 @@ position:relative;
 left:109px
     
   }
-.foodtable img[alt^="rating"] {
-  width: 80px;
-display:none;
-  height: 10px;
-  margin-top: 10px;
-
-position:relative;
-left:50px;
-}
 
 
 }
@@ -103,15 +94,7 @@ left:50px;
   line-height: 1.6;
 }
 
-/* Rating */
-.foodtable img[alt^="rating"] {
-  width: 80px;
-  height: 10px;
-  margin-top: 10px;
 
-position:relative;
-left:50px;
-}
 
 /* Quantity Control */
 .quantity-control {
@@ -141,4 +124,40 @@ left:50px;
   font-size: 1.2rem;
   font-weight: 600;
   color: #333;
+}
+/* Rating Alignment - Mobile */
+.foodtable .rating-container {
+  display: flex;
+  justify-content: center; /* Align stars horizontally */
+  margin-top: 10px;
+}
+
+.foodtable img[alt^="rating"] {
+  width: 80px;
+  height: 10px;
+  display: inline-block;
+}
+
+/* For larger screens - Tablet and Desktop */
+@media (min-width: 768px) {
+  .foodtable .rating-container {
+    justify-content: flex-start; /* Align stars to the left for larger screens */
+  }
+
+  .foodtable img[alt^="rating"] {
+    width: 80px;
+    height: 10px;
+    margin-left: 0; /* Reset left margin */
+  }
+}
+
+@media (min-width: 1200px) {
+  .foodtable .rating-container {
+    justify-content: flex-start; /* Same as tablet */
+  }
+
+  .foodtable img[alt^="rating"] {
+    width: 100px; /* Increase size for larger screens */
+    height: 12px;
+  }
 }
