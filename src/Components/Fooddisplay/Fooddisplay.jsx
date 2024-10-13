@@ -24,18 +24,15 @@ const Fooddisplay = ({ selectedCategory }) => {
                 src={`${url}/uploads/${item.image}`}
                 alt={item.name}
               />
+              <h2> {item.name}
+              </h2>
+              <h3>
+                ₹{item.price}
+              </3>
               <p>
-                <span>Name:</span> {item.name}
+                 {item.description}
               </p>
-              <p>
-                <span>Price:</span> ₹{item.price}
-              </p>
-              <p>
-                <span>Description:</span> {item.description}
-              </p>
-              <p>
-                <span>Category:</span> {item.category}
-              </p>
+              <img src="./" alt="rating stars "/>
               <div className="quantity-control">
                 <button onClick={() => removeFromCart(item._id)}>-</button>
                 <span>{cartItems[item._id] || 0}</span>
