@@ -28,7 +28,7 @@ const Fooddisplay = ({ selectedCategory }) => {
               <h3>₹{item.price}</h3>
               <p>{item.description}</p>
               
-  <img src="./rating.png" alt="rating">
+  <img src="./rating.png" alt="rating"/>
 
               <div className="quantity-control">
                 <button onClick={() => removeFromCart(item._id)}>-</button>
