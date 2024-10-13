@@ -5,9 +5,8 @@
   font-weight: 600;
   color: #2e2e2e;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 30px 0; /* Combine margin-top and margin-bottom */
   text-transform: capitalize;
-  margin-top: 30px;
 }
 
 /* Grid Layout */
@@ -22,23 +21,15 @@
 @media (min-width: 768px) {
   .items {
     grid-template-columns: repeat(2, 1fr); /* Two columns on tablets */
-    position: relative;
-    
   }
-
 }
 
 /* For larger screens */
 @media (min-width: 1200px) {
   .items {
     grid-template-columns: repeat(3, 1fr); /* Three columns on larger screens */
-    position: relative;
-position:relative;
-left:109px
-    
+    left: 109px; /* Only if needed for alignment */
   }
-
-
 }
 
 /* Card Styling */
@@ -94,8 +85,6 @@ left:109px
   line-height: 1.6;
 }
 
-
-
 /* Quantity Control */
 .quantity-control {
   display: flex;
@@ -125,17 +114,18 @@ left:109px
   font-weight: 600;
   color: #333;
 }
-/* Rating Alignment - Mobile */
+
+/* Rating Alignment */
 .foodtable .rating-container {
   display: flex;
-  justify-content: center; /* Align stars horizontally */
+  justify-content: center; /* Align stars horizontally on mobile */
   margin-top: 10px;
 }
 
 .foodtable img[alt^="rating"] {
-  width: 80px;
+  display: inline-block; /* Ensure images are inline */
+  width: 80px; /* Default size */
   height: 10px;
-  display: inline-block;
 }
 
 /* For larger screens - Tablet and Desktop */
@@ -143,19 +133,9 @@ left:109px
   .foodtable .rating-container {
     justify-content: flex-start; /* Align stars to the left for larger screens */
   }
-
-  .foodtable img[alt^="rating"] {
-    width: 80px;
-    height: 10px;
-    margin-left: 0; /* Reset left margin */
-  }
 }
 
 @media (min-width: 1200px) {
-  .foodtable .rating-container {
-    justify-content: flex-start; /* Same as tablet */
-  }
-
   .foodtable img[alt^="rating"] {
     width: 100px; /* Increase size for larger screens */
     height: 12px;
