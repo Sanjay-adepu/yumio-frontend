@@ -28,7 +28,6 @@
 @media (min-width: 1200px) {
   .items {
     grid-template-columns: repeat(3, 1fr); /* Three columns on larger screens */
-    left: 109px; /* Only if needed for alignment */
   }
 }
 
@@ -115,29 +114,17 @@
   color: #333;
 }
 
-/* Rating Alignment */
-.foodtable .rating-container {
-  display: flex;
-  justify-content: center; /* Align stars horizontally on mobile */
-  margin-top: 10px;
-}
-
-.foodtable img[alt^="rating"] {
-  display: inline-block; /* Ensure images are inline */
-  width: 80px; /* Default size */
-  height: 10px;
+/* Rating Image Styling */
+.foodtable img[alt="rating"] {
+  display: block;
+  margin: 10px auto;
+  width: 80px;
+  height: auto;
 }
 
 /* For larger screens - Tablet and Desktop */
 @media (min-width: 768px) {
-  .foodtable .rating-container {
-    justify-content: flex-start; /* Align stars to the left for larger screens */
-  }
-}
-
-@media (min-width: 1200px) {
-  .foodtable img[alt^="rating"] {
+  .foodtable img[alt="rating"] {
     width: 100px; /* Increase size for larger screens */
-    height: 12px;
   }
 }
