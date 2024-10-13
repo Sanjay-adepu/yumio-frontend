@@ -23,7 +23,7 @@
   .items {
     grid-template-columns: repeat(2, 1fr); /* Two columns on tablets */
     position: relative;
-    left: 25px;
+    
   }
 }
 
