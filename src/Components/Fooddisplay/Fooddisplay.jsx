@@ -32,7 +32,7 @@ const Fooddisplay = ({ selectedCategory }) => {
               <p>
                  {item.description}
               </p>
-              <img src="./" alt="rating stars "/>
+              <img src="./rating.png" alt="rating stars "/>
               <div className="quantity-control">
                 <button onClick={() => removeFromCart(item._id)}>-</button>
                 <span>{cartItems[item._id] || 0}</span>
