@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import {items} from "../Assets/Catagory.js";
+
 
 export const StoreContext = createContext(null);
 
@@ -8,7 +8,7 @@ const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
 
 
-const url= "http://localhost:4500";
+
 
     const addToCart = (itemId) => {
         if (!cartItems[itemId]) {
