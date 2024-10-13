@@ -49,12 +49,7 @@ const Navbar = ({ onSearch, footerRef }) => {
             </ul>
           </div>
           <div className="logos">
-            <input 
-              type="search" 
-              placeholder="search" 
-              id="searchbar" 
-              onChange={handleSearchChange}
-            />
+          
             <Link to='/cart'>
               <img id="basket" src="./cartset.png" alt="shopping basket" />
             </Link>
