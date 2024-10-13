@@ -25,6 +25,14 @@
     position: relative;
     
   }
+.foodtable img[alt^="rating"] {
+  width: 80px;
+  height: 10px;
+  margin-top: 10px;
+position:relative;
+left:50px
+}
+
 }
 
 /* For larger screens */
@@ -32,7 +40,7 @@
   .items {
     grid-template-columns: repeat(3, 1fr); /* Three columns on larger screens */
     position: relative;
-    left: 32px;
+    
   }
 }
 
@@ -95,7 +103,7 @@
   height: 10px;
   margin-top: 10px;
 position:relative;
-left:80px
+left:100px
 }
 
 /* Quantity Control */
