@@ -19,20 +19,15 @@ const Fooddisplay = ({ selectedCategory }) => {
         {filteredItems.length > 0 ? (
           filteredItems.map((item, index) => (
             <div key={index} className="foodtable">
-              <div onClick={() => console.log("Removing food with ID:", item._id)}>Remove</div>
+              <div onClick={() => removeFromCart(item._id)}>Remove</div>
               <img
                 src={`${url}/uploads/${item.image}`}
                 alt={item.name}
               />
-              <h2> {item.name}
-              </h2>
-              <h3>
-                ₹{item.price}
-              </3>
-              <p>
-                 {item.description}
-              </p>
-              <img src="./rating.png" alt="rating stars "/>
+              <h2> {item.name} </h2>
+              <h3>₹{item.price}</h3>
+              <p>{item.description}</p>
+              <img src="./rating.png" alt={`rating stars for ${item.name}`} />
               <div className="quantity-control">
                 <button onClick={() => removeFromCart(item._id)}>-</button>
                 <span>{cartItems[item._id] || 0}</span>
