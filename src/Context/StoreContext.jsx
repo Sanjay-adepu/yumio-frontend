@@ -50,6 +50,15 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
+useEffect(() => {
+  const storedCart = localStorage.getItem('cart');
+  if (storedCart) {
+    setCartItems(JSON.parse(storedCart)); // Load saved cart from localStorage
+  }
+}, []);
+
+
+
   return (
     <StoreContext.Provider
       value={{ cartItems, addToCart, removeFromCart, getTotalCartAmount, foodItems }}
