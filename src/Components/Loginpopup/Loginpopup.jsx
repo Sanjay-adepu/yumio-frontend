@@ -19,34 +19,28 @@ const Loginpopup = ({ setShowLogin }) => {
   }
 
   const onsubmithandler = async (event) => {
-    event.preventDefault();  // Prevent form from reloading the page
-    const url = currState === "Login" ? `${link}/user/login` : `${link}/user/register`;
-    
-    try {
-      const response = await axios.post(url, data);
-      
-      // Log the response for debugging
-      console.log("Response:", response.data);
+  event.preventDefault(); // Prevent page reload
+  const url = currState === "Login" ? `${link}/user/login` : `${link}/user/register`;
 
-      if (response.data.success) {
-        alert(response.data.message);
-        
-        // Store token if available (in case of login)
-        const token = response.data.token;
-        if (token) {
-          localStorage.setItem('token', token);
-        }
+  try {
+    const response = await axios.post(url, data);
 
-        setShowLogin(false);
-      } else {
-        alert(response.data.message);
-      }
-    } catch (error) {
-      // Log the error response for debugging
-      console.error("Error occurred: ", error.response ? error.response.data : error.message);
-      alert("Error occurred, try again later");
+    if (response.data.success) {
+      alert(response.data.message);
+
+      // Save the token and cart data in localStorage
+      const token = response.data.token;
+      localStorage.setItem('token', token); // Save token
+      localStorage.setItem('cart', JSON.stringify(response.data.cartlist)); // Save cart data
+
+      setShowLogin(false); // Close login popup
+    } else {
+      alert(response.data.message);
     }
+  } catch (error) {
+    alert("Error occurred, try again later");
   }
+};
 
   return (
     <div className="login-popup">
