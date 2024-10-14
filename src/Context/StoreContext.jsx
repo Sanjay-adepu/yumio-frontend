@@ -27,17 +27,43 @@ const StoreContextProvider = (props) => {
     fetchFoodItems();
   }, []);
 
-  const addToCart = (itemId) => {
-    if (!cartItems[itemId]) {
-      setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
-    } else {
-      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    }
-  };
+  
 
-  const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-  };
+const updateCartInBackend = async (newCart) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    try {
+      await axios.put(`${url}/user/update-cart`, { cartlist: newCart }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+    } catch (error) {
+      console.error("Error updating cart:", error);
+    }
+  }
+};
+
+// Add to Cart
+const addToCart = (itemId) => {
+  setCartItems((prev) => {
+    const updatedCart = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
+    updateCartInBackend(updatedCart); // Save updated cart to backend
+    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save cart in localStorage
+    return updatedCart;
+  });
+};
+
+// Remove from Cart
+const removeFromCart = (itemId) => {
+  setCartItems((prev) => {
+    const updatedCart = { ...prev, [itemId]: prev[itemId] - 1 };
+    updateCartInBackend(updatedCart); // Save updated cart to backend
+    localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save cart in localStorage
+    return updatedCart;
+  });
+};
+
+
+
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
