@@ -146,62 +146,7 @@ bottom:3px;
   text-decoration:none;
 }
 
-@media(max-width: 670px) {
-  .elements {
-    display: none;
-  }
-  .profile{
-    display:none;
-  }
-  #new{
-    text-decoration: none;
-    list-style: none;
-    color:black;
-  }
-  .list {
-    display: none;
-  }
-  .logos {
-    display: none;
-  }
-  
-  #button {
-    display: none;
-  }
-  .title img {
-    height: 70px;
-    width: 120px;
-  }
-  #searchbar{
-    display: block;
-  }
-  #menu {
-    display: block;
-    width: 50px;
-    height: 50px;
-  }
-  .sidelist {
-    display: flex;
-    flex-direction: column;
-    background: #e1c862f0;
-    list-style:none
-  }
-  .sidelist li {
-    padding: 10px 0;
-    width: 80px;
-    margin: auto;
-  }
-  .sidelist li:hover{
-    color:red;
-  }
-  #home{
-  text-decoration:none;
-  color:black;
 
-font-size:15px
-}
-  
-}
 @media(max-width: 1100px) {
   
 #button {
