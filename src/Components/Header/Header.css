@@ -11,7 +11,10 @@
 #head-search{
   display: none;
 }
-
+#screen{
+color:red,
+display:none
+}
 
 
 @media(max-width: 640px){
