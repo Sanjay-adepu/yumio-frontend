@@ -21,6 +21,11 @@ display:none
   .header img{
     height:160px
   }
+
+#screen{
+color:red,
+display:block
+}
   #head-search{
     display:flex;
     align-items: center;
