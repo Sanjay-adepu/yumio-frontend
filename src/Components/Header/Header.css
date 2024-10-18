@@ -6,9 +6,17 @@
   position:relative;
   top:30px;
 }
+#screen{
+display:none;
+}
+
+
 #head-search{
   display: none;
 }
+
+
+
 @media(max-width: 640px){
   .header img{
     height:160px
