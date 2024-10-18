@@ -71,20 +71,23 @@ const Navbar = ({ onSearch, footerRef }) => {
         </div>
 
         {isSidebarVisible && (
-          <div className="sidebar">
-            <ul className="sidelist">
-              <Link id="new" to="/">
-                <li>Home</li>
-              </Link>
-           {!token ?(<li onClick={() => setShowLogin(true)}>Sign In</li>): <li onClick={handleLogout}> log out</li>
-              <li onClick={scrollToFooter}>Contact Us</li>
-}
-              <Link id="new" to="/cart">
-                <li>Cart</li>
-              </Link>
-            </ul>
-          </div>
-        )}
+  <div className="sidebar">
+    <ul className="sidelist">
+      <Link id="new" to="/">
+        <li>Home</li>
+      </Link>
+      {!token ? (
+        <li onClick={() => setShowLogin(true)}>Sign In</li>
+      ) : (
+        <li onClick={handleLogout}>log out</li>
+      )}
+      <li onClick={scrollToFooter}>Contact Us</li>
+      <Link id="new" to="/cart">
+        <li>Cart</li>
+      </Link>
+    </ul>
+  </div>
+)}
       </div>
     </>
   );
