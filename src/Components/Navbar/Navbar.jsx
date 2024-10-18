@@ -89,7 +89,6 @@ const Navbar = ({ onSearch, footerRef }) => {
       ) : (
         <li onClick={handleLogout}>log out</li>
       )}
-
     </ul>
   </div>
 )}
