@@ -78,6 +78,7 @@ const Navbar = ({ onSearch, footerRef }) => {
               </Link>
            {!token ?(<li onClick={() => setShowLogin(true)}>Sign In</li>): <li onClick={handleLogout}> log out</li>
               <li onClick={scrollToFooter}>Contact Us</li>
+}
               <Link id="new" to="/cart">
                 <li>Cart</li>
               </Link>
