@@ -7,7 +7,7 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [foodItems, setFoodItems] = useState([]); // Store food items
 
-  const url = "http://localhost:4500";
+  const url = "https://yumio-backend.onrender.com";
 
   // Fetch food items from API 
   useEffect(() => {
