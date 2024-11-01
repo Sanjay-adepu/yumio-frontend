@@ -29,7 +29,7 @@ const Cart = () => {
             if (quantity > 0) {
               return (
                 <div key={item._id} className="cart-items-title cart-items-item">
-                  <img src={`http://localhost:4500/uploads/${item.image}`} alt={item.name} />
+                  <img src={`https://sanjay-adepu-yumio.onrender.com/uploads/${item.image}`} alt={item.name} />
                   <p>{item.name}</p>
                   <p>₹{item.price.toFixed(2)}</p>
                   <p>{quantity}</p>
