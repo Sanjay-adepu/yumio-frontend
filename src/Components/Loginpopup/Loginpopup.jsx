@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Loginpopup.css';
 import axios from "axios";
 
-const link = "http://localhost:4500"; // Ensure this is your backend URL
+const link = "https://yumio-backend.onrender.com"; // Ensure this is your backend URL
 
 const Loginpopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("Login");
