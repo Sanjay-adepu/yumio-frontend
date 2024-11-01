@@ -5,7 +5,7 @@ import { StoreContext } from "../../Context/StoreContext";
 const Fooddisplay = ({ selectedCategory }) => {
   const { cartItems, addToCart, removeFromCart, foodItems } = useContext(StoreContext);
 
-  const url = "http://localhost:4500";
+  const url = "https://yumio-backend.onrender.com";
 
   // Filter food items based on selected category
   const filteredItems = selectedCategory
