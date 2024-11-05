@@ -92,9 +92,9 @@
 /* Optional: Style for the profile picture */
 .profile img {
   cursor: pointer;
-  width: 40px; /* Adjust profile picture size */
-  height: 40px;
-  border-radius: 50%; /* Makes the profile picture circular */
+  width: 45px; /* Adjust profile picture size */
+  height: 45px;
+  /* Makes the profile picture circular */
 }
 
 
