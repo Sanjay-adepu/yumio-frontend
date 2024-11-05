@@ -94,7 +94,7 @@
   cursor: pointer;
   width: 40px; /* Adjust profile picture size */
   height: 40px;
-border-radius:50%;
+border-radius:60%;
   /* Makes the profile picture circular */
 }
 
